@@ -1,0 +1,5 @@
+Autotest.add_hook :initialize do |at|
+  at.add_mapping(%r%^lib/tasks/(.*)\.rake$%) { |_, t|
+    ["spec/lib/tasks/#{t[1]}_spec.rb"]
+  }
+end
