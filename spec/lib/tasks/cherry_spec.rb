@@ -38,6 +38,19 @@ describe "cherry task" do
     end
   end
 
+  context 'with multiple supplied tickets' do
+    before :each do
+      @helper = mock(GitHelper, :null_object => true)
+      GitHelper.stub!(:new).and_return(@helper)
+    end
+
+    it 'should find the relevant commits form master' do
+      @helper.should_receive(:find_by_tickets).with(["528", "700"]).and_return(mocked_commits_multiple)
+      out, _ = run_task("528:700")
+      out.should match(/Applying commit 1e809b1/)
+    end
+  end
+
   private
   def run_task(arg = nil)
     capture_output do
@@ -51,6 +64,18 @@ describe "cherry task" do
 f665dcd Ticket #426: Fixing something
 8a65b36 Ticket #426
 cea9613 Ticket #426
+EOF
+  end
+
+  def mocked_commits_multiple
+    <<-EOF
+54add46 Ticket #700
+6cc1e72 Ticket #700
+ad55797 Ticket #700
+1e809b1 Ticket #528
+7d7762a Ticket #528
+473efbb Ticket #528
+2b5866d Ticket #528
 EOF
   end
 end
