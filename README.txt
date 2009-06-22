@@ -1,1 +1,53 @@
-This is a dummy file, just to test a task of Rakefile
+= Rake cherry (cerise)
+
+Simplify pushing commits to production!
+
+Rake cherry is a small task to help you under some workflows where
+Features or bug-fixes are being tracked as Tickets and sometimes, testing
+and approval of them requires more than one commit.
+
+When you face those situations, cherry-picking the individual commits that
+conform a bug-fix can be time consuming and error prone (cherry pick the same
+commit twice).
+
+Rake cherry task simplifies the process abstracting the git command complexity
+and let you automate it.
+
+== Usage
+
+Let say you have multiple commits for Ticket #700 and #528 located in master:
+
+  54add46 Ticket #700
+  1e809b1 Ticket #528
+  7d7762a Ticket #528
+  6cc1e72 Ticket #700
+  ad55797 Ticket #700
+  473efbb Ticket #528
+  2b5866d Ticket #528
+
+Now, those two tickets got approval, so need to be pushed to production.
+Normal logic will dictate that you will pick all the commits of Ticket #700 and
+then #528.
+
+With Rake cherry:
+
+  rake cherry[700:528]
+
+All the commits will be picked automatically, and in the creation order, so you don't
+need to worry about which commits should be applied first.
+
+In case of a conflict, Rake cherry will abort letting you solve it, as you normally will
+do, and continue again.
+
+Don't worry, if a commits was already cherry-pick manually, it wouldn't be cherry picked 
+again.
+
+== License
+
+Copyright (c) 2009 Luis Lavena for AREA 17
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
