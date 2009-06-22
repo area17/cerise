@@ -45,7 +45,7 @@ describe "cherry task" do
     end
 
     it 'should find the relevant commits form master' do
-      @helper.should_receive(:find_by_tickets).with(["528", "700"]).and_return(mocked_commits_multiple)
+      @helper.should_receive(:find_by_tickets).with("528", "700").and_return(mocked_commits_multiple)
       out, _ = run_task("528:700")
       out.should match(/Applying commit 1e809b1/)
     end
