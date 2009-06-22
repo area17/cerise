@@ -42,6 +42,14 @@ do, and continue again.
 Don't worry, if a commits was already cherry-pick manually, it wouldn't be cherry picked 
 again.
 
+== Installation
+
+This project has been structured to be used with Rails, to install it simply run:
+
+  ruby script/plugin install git://github.com/area17/cerise.git
+
+And you should have <tt>cherry</tt> task available.
+
 == License
 
 Copyright (c) 2009 Luis Lavena for AREA 17
