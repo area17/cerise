@@ -5,7 +5,13 @@ class GitHelper
   end
 
   def apply_commit(sha)
-    system "git cherry-pick #{sha}"
+    output = `git cherry-pick #{sha}`
+    if $?.exitstatus == 0 || $?.exitstatus == 1
+      return true
+    else
+      puts output
+      return false
+    end
   end
 end
 
@@ -17,7 +23,7 @@ task :cherry, :tickets do |t, args|
 
   fail "You must supply at least one ticket number" if tickets.empty?
 
-  output = helper.find_by_tickets(tickets)
+  output = helper.find_by_tickets(*tickets)
 
   # build commit list
   commits = output.scan(/([a-f0-9]{7}).*?\s(.*)/i)
