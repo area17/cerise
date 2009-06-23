@@ -1,7 +1,6 @@
 class GitHelper
   def find_by_tickets(*tickets)
-    t = tickets.map { |ticket| "##{ticket}" }
-    `git log --reverse --abbrev-commit --pretty=oneline --cherry-pick master... | grep -E "#{t.join('|')}"`
+    `git log --reverse --abbrev-commit --pretty=oneline --cherry-pick master... | grep -E "#(#{tickets.join('|')})\D"`
   end
 
   def apply_commit(sha)
